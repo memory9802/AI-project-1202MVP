@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outfit AI 穿搭推薦</title>
+  <style>
+    body {
+      font-family: "Segoe UI", "Noto Sans TC", sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 10px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      padding: 16px 24px;
+    }
+    h1 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #555;
+      font-size: 14px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    select, button {
+      padding: 10px 14px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4285f4;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    
+    /* 載入動畫 */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+    .loading.active {
+      display: block;
+    }
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #4285f4;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* 錯誤提示 */
+    .error-message {
+      background-color: #fee;
+      border-left: 4px solid #f44;
+      padding: 12px;
+      border-radius: 4px;
+      margin: 10px 0;
+      color: #c33;
+      display: none;
+    }
+    .error-message.active {
+      display: block;
+    }
+    
+    /* 成功提示 */
+    .success-message {
+      background-color: #efe;
+      border-left: 4px solid #4c4;
+      padding: 12px;
+      border-radius: 4px;
+      margin: 10px 0;
+      color: #363;
+    }
+    .section {
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .keyword-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background-color: #e9f0ff;
+      font-size: 13px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #f7f7f9;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin: 0;
+    }
+    .outfit-card {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .outfit-image {
+      width: 120px;
+      min-width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+      background-color: #f4f4f4;
+      display: block;
+    }
+    .outfit-image-placeholder {
+      width: 120px;
+      min-width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      background: repeating-linear-gradient(
+        45deg,
+        #f4f4f4,
+        #f4f4f4 10px,
+        #e4e4e4 10px,
+        #e4e4e4 20px
+      );
+    }
+    .outfit-info h3 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+    }
+    .outfit-meta {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: #777;
+    }
+    .outfit-desc {
+      margin: 0 0 6px 0;
+      font-size: 14px;
+    }
+    .items-list {
+      margin-top: 4px;
+      padding-left: 18px;
+      font-size: 14px;
+    }
+    .items-list li {
+      margin-bottom: 2px;
+    }
+    .empty-tip {
+      font-size: 14px;
+      color: #777;
+    }
+
+    /* 在小視窗 / iframe 裡也能好看一點 */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 16px;
+      }
+      .outfit-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .outfit-image,
+      .outfit-image-placeholder {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>👗 Outfit AI 穿搭推薦</h1>
+    <p class="subtitle">
+      請描述你的穿搭需求，例如：「今天要去約會，但有點冷」，或「明天要去上班簡報」。
+    </p>
+
+    <!-- 🔹 查詢表單：POST 回到 /recommend_page -->
+    <form method="POST" id="recommendForm">
+      <div>
+        <label for="message">你的需求：</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="輸入你今天的場合、風格或天氣描述..."
+          required
+        >{{ user_input or '' }}</textarea>
+      </div>
+
+      <div>
+        <label for="model">選擇模型（可選）：</label>
+        <select id="model" name="model">
+          <option value="auto" {% if selected_model == 'auto' %}selected{% endif %}>自動選擇</option>
+          <option value="gemini" {% if selected_model == 'gemini' %}selected{% endif %}>Gemini</option>
+          <option value="groq" {% if selected_model == 'groq' %}selected{% endif %}>Groq</option>
+          <option value="deepseek" {% if selected_model == 'deepseek' %}selected{% endif %}>DeepSeek</option>
+        </select>
+      </div>
+
+      <button type="submit" id="submitBtn">送出查詢</button>
+    </form>
+
+    <!-- 載入動畫 -->
+    <div class="loading" id="loadingDiv">
+      <div class="spinner"></div>
+      <p>🤖 AI 正在思考穿搭建議，請稍候...</p>
+    </div>
+
+    <!-- 錯誤訊息 -->
+    <div class="error-message" id="errorDiv"></div>
+
+    <!-- 🔍 關鍵字區塊 -->
+    {% if keywords %}
+    <div class="section">
+      <h2>🔍 偵測到的關鍵字</h2>
+      <div class="keywords">
+        {% for kw in keywords %}
+        <span class="keyword-tag">{{ kw }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- 💬 AI 文字回覆 -->
+    {% if ai_response %}
+    <div class="section">
+      <h2>💬 AI 推薦說明</h2>
+      <pre>{{ ai_response }}</pre>
+    </div>
+    {% elif user_input %}
+    <!-- 有輸入但沒有回覆（理論上不太會發生），給個提示 -->
+    <div class="section">
+      <h2>💬 AI 推薦說明</h2>
+      <p class="empty-tip">已收到你的輸入，但目前沒有可顯示的 AI 回應。</p>
+    </div>
+    {% endif %}
+
+    <!-- 🧥 推薦穿搭 / 搜尋結果 -->
+    {% if outfits %}
+    <div class="section">
+      <h2>🧥 推薦穿搭組合</h2>
+
+      {% for outfit in outfits %}
+      <div class="outfit-card">
+        <!-- 穿搭圖片：如果 DB 有 image_url 就顯示，沒有就用 placeholder -->
+        {% if outfit._image %}
+          <img
+            src="{{ outfit._image }}"
+            alt="{{ outfit._title }}"
+            class="outfit-image"
+          />
+        {% else %}
+          <div class="outfit-image-placeholder"></div>
+        {% endif %}
+
+        <div class="outfit-info">
+          <h3>{{ outfit._title }}</h3>
+
+          {% if outfit._occasion %}
+          <p class="outfit-meta">場合：{{ outfit._occasion }}</p>
+          {% endif %}
+
+          {% if outfit._description %}
+          <p class="outfit-desc">{{ outfit._description }}</p>
+          {% endif %}
+
+          {% if outfit['items'] %}
+           <ul class="items-list">
+            {% for item in outfit['items'] %}
+            <li>
+             {{ item.name }}
+             {% if item.color %} - {{ item.color }}{% endif %}
+             {% if item.category %}（{{ item.category }}）{% endif %}
+            </li>
+           {% endfor %}
+          </ul>
+{% endif %}
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% elif ai_response %}
+    <!-- 有 AI 回覆但沒有 outfits（理論上比較少），也提示一下 -->
+    <div class="section">
+      <h2>🧥 推薦穿搭組合</h2>
+      <p class="empty-tip">目前沒有額外的穿搭組合可以顯示。</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <script>
+    // 表單提交處理
+    const form = document.getElementById('recommendForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingDiv = document.getElementById('loadingDiv');
+    const errorDiv = document.getElementById('errorDiv');
+
+    // 檢查是否有 AI 回應錯誤
+    {% if ai_response and ('❌' in ai_response or '錯誤' in ai_response or '失敗' in ai_response or '無法' in ai_response) %}
+    errorDiv.textContent = '⚠️ AI 服務回應異常，可能是 API 配額不足或連線問題。請稍後再試或切換其他模型。';
+    errorDiv.classList.add('active');
+    {% endif %}
+
+    form.addEventListener('submit', function(e) {
+      const message = document.getElementById('message').value.trim();
+      if (!message) {
+        e.preventDefault();
+        errorDiv.textContent = '⚠️ 請輸入您的穿搭需求';
+        errorDiv.classList.add('active');
+        return;
+      }
+
+      // 顯示載入動畫
+      loadingDiv.classList.add('active');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '處理中...';
+      errorDiv.classList.remove('active');
+      
+      // 表單會自動提交，頁面重新載入後會顯示結果
+    });
+
+    // 如果有 AI 回應，隱藏載入動畫
+    {% if ai_response %}
+    loadingDiv.classList.remove('active');
+    {% endif %}
+  </script>
+</body>
+</html>

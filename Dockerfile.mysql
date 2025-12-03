@@ -1,0 +1,29 @@
+# =====================================
+# MySQL 自訂建置 Dockerfile
+# 解決 macOS 檔案共享權限問題
+# =====================================
+
+FROM mysql:8.0
+
+# 設定作者資訊
+LABEL maintainer="AI-project Team"
+LABEL description="Custom MySQL with pre-built init scripts"
+
+# 將初始化 SQL 腳本直接複製到映像中
+# 避免 macOS Docker 檔案共享權限問題
+COPY ./init /docker-entrypoint-initdb.d/
+
+# 設定正確的檔案權限
+# 目錄需要執行權限 (755)，檔案需要讀取權限 (644)
+RUN chmod 755 /docker-entrypoint-initdb.d && \
+    find /docker-entrypoint-initdb.d -type f -name "*.sql" -exec chmod 644 {} \; && \
+    find /docker-entrypoint-initdb.d -type f -name "*.sh" -exec chmod 755 {} \;
+
+# 驗證權限設定
+RUN echo "=== Init directory permissions ===" && \
+    ls -la /docker-entrypoint-initdb.d/ && \
+    echo "=== MySQL init setup completed ==="
+
+# 使用官方 MySQL 的預設配置
+# 支援 utf8mb4 和現代認證外掛
+CMD ["mysqld"]

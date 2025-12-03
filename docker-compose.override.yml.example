@@ -1,0 +1,103 @@
+# 個人 Docker Compose 配置覆寫範本
+# 
+# 📖 使用說明：
+# 1. 複製此檔案並重新命名為 docker-compose.override.yml
+#    cp docker-compose.override.yml.example docker-compose.override.yml
+# 
+# 2. 根據您的本機環境需求修改配置
+# 
+# 3. ⚠️ 不要將 docker-compose.override.yml 提交到 Git
+#    (已在 .gitignore 中設定)
+# 
+# 🎯 常見使用情境：
+
+services:
+  # ============================================
+  # MySQL 資料庫服務 - 個人環境適配
+  # ============================================
+  mysql:
+    # 如果 3306 端口被佔用，改用其他端口
+    # ports:
+    #   - "3307:3306"  # 將本機的 3307 對應到容器的 3306
+    
+    # 如果需要自訂資料存放路徑
+    # volumes:
+    #   - /your/custom/path:/var/lib/mysql
+    #   - ./init:/docker-entrypoint-initdb.d
+    
+    # 如果需要不同的記憶體限制
+    # mem_limit: 1g
+    # mem_reservation: 512m
+
+  # ============================================
+  # Flask 應用程式服務 - 個人環境適配
+  # ============================================
+  flask:
+    # 如果 5001 端口被佔用，改用其他端口
+    # ports:
+    #   - "5002:5000"  # 將本機的 5002 對應到容器的 5000
+    
+    # 如果需要掛載額外的開發目錄
+    # volumes:
+    #   - ./app:/app
+    #   - ./logs:/app/logs
+    
+    # 如果需要個人專屬的環境變數
+    # environment:
+    #   DEBUG: "True"
+    #   LOG_LEVEL: "DEBUG"
+
+  # ============================================
+  # phpMyAdmin 服務 - 個人環境適配
+  # ============================================
+  phpmyadmin:
+    # 如果 8080 端口被佔用，改用其他端口
+    # ports:
+    #   - "8081:80"  # 將本機的 8081 對應到容器的 80
+
+# ============================================
+# 常見個人化配置範例
+# ============================================
+
+# 範例 1: Windows 用戶可能需要的配置
+# services:
+#   mysql:
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#       - ./init:/docker-entrypoint-initdb.d:ro
+#   flask:
+#     volumes:
+#       - ./app:/app:cached
+#     environment:
+#       PYTHONPATH: "/app"
+
+# 範例 2: macOS 用戶效能優化
+# services:
+#   flask:
+#     volumes:
+#       - ./app:/app:delegated
+#     environment:
+#       DOCKER_BUILDKIT: "1"
+
+# 範例 3: 開發除錯配置
+# services:
+#   flask:
+#     ports:
+#       - "5001:5000"
+#       - "5678:5678"  # Python debugger port
+#     environment:
+#       FLASK_DEBUG: "1"
+#       PYTHONDONTWRITEBYTECODE: "1"
+#     command: ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "app.py"]
+
+# 範例 4: 多專案並行開發
+# services:
+#   mysql:
+#     ports:
+#       - "3307:3306"  # AI-project 用 3307
+#   flask:
+#     ports:
+#       - "5002:5000"  # AI-project 用 5002
+#   phpmyadmin:
+#     ports:
+#       - "8082:80"    # AI-project 用 8082

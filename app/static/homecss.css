@@ -1,0 +1,203 @@
+:root {
+  --header-height: 80px; /* 定義一個 header 高度的變數，可根據實際情況微調 */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  background: #f5f5f5;
+}
+
+/* 固定在右下角的按鈕和對話框容器 */
+.dialog-container {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+/* 按鈕樣式 - 圓形浮動按鈕 */
+#toggleBtn {
+  width: 60px; /* 調整為固定像素大小 */
+  height: 60px; /* 調整為固定像素大小 */
+  background: #D8A7B1;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(216, 167, 177, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+#toggleBtn:hover {
+  background: #c89aa4;
+  box-shadow: 0 6px 20px rgba(216, 167, 177, 0.6);
+  transform: scale(1.05);
+}
+
+#toggleBtn .material-symbols-outlined {
+  font-size: 32px; /* 稍微加大圖示 */
+}
+
+/* 對話框樣式 */
+#dialog {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  width: 35vw;   /* 調整寬度 */
+  height: calc(100vh - var(--header-height) - 65px); /* 高度動態計算 */
+  max-height: calc(100vh - var(--header-height) - 65px);
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transform-origin: bottom right;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 彈出對話框 */
+#dialog.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* 對話框標題欄 */
+.dialog-header {
+  background: #D8A7B1;
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 16px 16px 0 0;
+  flex-shrink: 0; /* 防止標題欄被壓縮 */
+}
+
+.dialog-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(0,0,0,0.15);
+}
+
+.close-btn .material-symbols-outlined {
+  font-size: 22px;
+}
+
+/* Iframe 樣式 */
+#dialog iframe {
+  flex-grow: 1; /* 讓 iframe 填滿剩餘空間 */
+  border: none;
+}
+
+/* --- 響應式設計 --- */
+
+/* 中等螢幕 (例如：平板) */
+@media (max-width: 1024px) {
+  #dialog {
+    width: 50vw;
+    height: calc(100vh - var(--header-height) - 65px);
+    max-height: calc(100vh - var(--header-height) - 65px);
+  }
+}
+
+/* 小型螢幕 (例如：手機) */
+@media (max-width: 768px) {
+  .dialog-container {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  #toggleBtn {
+    width: 56px;
+    height: 56px;
+  }
+
+  #toggleBtn .material-symbols-outlined {
+    font-size: 28px;
+  }
+
+  #dialog {
+    width: 90vw;
+    height: calc(100vh - var(--header-height) - 90px);
+    max-height: calc(100vh - var(--header-height) - 90px);
+    margin-bottom: 12px;
+  }
+
+  .dialog-header {
+    background: #D8A7B1;
+    color: white;
+    padding: 14px 16px;
+  }
+
+  .dialog-header h3 {
+    font-size: 16px;
+  }
+}
+
+  #hero-1946 .cs-item {
+    text-align: center;
+    list-style: none;
+    width: 20%;
+    margin: 0;
+    box-sizing: border-box;
+    /* 24px - 32px */
+    padding: clamp(1.5rem, 3vw, 2rem);
+    background-color: #F7F7F7;
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: span 12;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.3s;
+  }
+  #hero-1946 .cs-item:hover {
+    border-color: var(--primary);
+  }
+  #hero-1946 .cs-item:hover .cs-h3 {
+    color: var(--primary);
+  }
+  #hero-1946 .cs-item:hover .cs-icon {
+    transform: rotateY(360deg);
+  }
+  #hero-1946 .cs-icon-picture {
+    margin-bottom: 1.25rem;
+    perspective: 700px;
+    transform-style: preserve-3d;
+  }
+  #hero-1946 .cs-icon {
+    width: 2.5rem;
+    height: auto;
+    display: block;
+    transition: transform 0.5s;
+  }

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>StyleRec - 穿搭推薦</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="ImgCarousel.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="HomeCSS.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#D8A7B1",
+            "background-light": "#F9F9F9",
+            "background-dark": "#1f1f1f",
+            "text-light": "#333333",
+            "text-dark": "#EAEAEA",
+            "secondary-light": "#EAE7DC",
+            "secondary-dark": "#303030",
+            "subtle-light": "#888888",
+            "subtle-dark": "#AAAAAA",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .star-rating {
+      display: flex;
+      gap: 4px;
+      font-size: 20px;
+    }
+
+    .star {
+      cursor: pointer;
+      color: #888888;
+      transition: color 0.2s;
+    }
+
+    .star.active,
+    .star:hover {
+      color: #D8A7B1;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+  <section id="hero-1946">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- Header-->
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-secondary-light dark:border-secondary-dark px-6 md:px-10 lg:px-20 py-4">
+          <div class="flex items-center gap-4">
+            <div class="size-6 text-primary">
+              <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2zm-4-4h4v2H6v-2z">
+                </path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">StyleRec</h2>
+          </div>
+          <div class="hidden md:flex items-center gap-9">
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png0.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="home.html">首頁</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png1.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="wardrobe.html">我的衣櫃</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png2.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="recommendation.html">穿搭推薦</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png3.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="share.html">分享 &amp; 互動</a>
+            </li>
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+              <span class="material-symbols-outlined text-xl">person</span>
+            </button>
+            <button class="md:hidden flex items-center justify-center h-10 w-10">
+              <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 py-8 md:py-12 px-6 md:px-10 lg:px-20">
+          <div class="max-w-6xl mx-auto">
+            <!-- Page Title -->
+            <div class="mb-8">
+              <h1 class="text-3xl md:text-4xl font-bold mb-2">穿搭分享</h1>
+              <p class="text-subtle-light dark:text-subtle-dark">分享你的穿搭靈感，與社群互動和評分</p>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- Upload Section (Left - 1 column) -->
+              <div class="lg:col-span-1">
+                <div
+                  class="sticky top-24 bg-white dark:bg-secondary-dark rounded-lg p-6 shadow-sm border border-secondary-light dark:border-secondary-dark">
+                  <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined">upload</span>
+                    上傳穿搭
+                  </h2>
+
+                  <!-- Upload Form -->
+                  <form id="upload-form" class="space-y-4">
+                    <!-- Image Upload -->
+                    <div>
+                      <label class="block text-sm font-medium mb-2">穿搭照片</label>
+                      <div
+                        class="border-2 border-dashed border-secondary-light dark:border-secondary-dark rounded-lg p-6 text-center cursor-pointer hover:bg-secondary-light/30 dark:hover:bg-secondary-dark/30 transition-colors"
+                        id="upload-area">
+                        <input type="file" id="image-input" accept="image/*" class="hidden" />
+                        <span class="material-symbols-outlined text-4xl text-primary mb-2 block">image</span>
+                        <p class="text-sm font-medium">點擊或拖放上傳照片</p>
+                        <p class="text-xs text-subtle-light dark:text-subtle-dark mt-1">支援 JPG, PNG, GIF (最大 5MB)</p>
+                      </div>
+                      <img id="preview-image" class="w-full rounded-lg mt-2 hidden" />
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                      <label class="block text-sm font-medium mb-2">穿搭描述</label>
+                      <textarea id="description-input" placeholder="描述你的穿搭靈感..."
+                        class="w-full px-4 py-3 border border-secondary-light dark:border-secondary-dark rounded-lg bg-white dark:bg-secondary-dark text-text-light dark:text-text-dark focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none"
+                        rows="4"></textarea>
+                    </div>
+
+                    <!-- Tags -->
+                    <div>
+                      <label class="block text-sm font-medium mb-2">風格標籤</label>
+                      <div class="flex flex-wrap gap-2 mb-2">
+                        <input type="hidden" id="tags-input" />
+                        <button type="button"
+                          class="tag-btn px-3 py-1 rounded-full text-sm bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 transition-colors"
+                          data-tag="約會">約會</button>
+                        <button type="button"
+                          class="tag-btn px-3 py-1 rounded-full text-sm bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 transition-colors"
+                          data-tag="運動">運動</button>
+                        <button type="button"
+                          class="tag-btn px-3 py-1 rounded-full text-sm bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 transition-colors"
+                          data-tag="上班">上班</button>
+                        <button type="button"
+                          class="tag-btn px-3 py-1 rounded-full text-sm bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 transition-colors"
+                          data-tag="休閒">休閒</button>
+                        <button type="button"
+                          class="tag-btn px-3 py-1 rounded-full text-sm bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 transition-colors"
+                          data-tag="派對">派對</button>
+                      </div>
+                      <div id="selected-tags" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                      class="w-full py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                      上傳穿搭
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Outfits Feed (Right - 2 columns) -->
+              <div class="lg:col-span-2 space-y-6">
+                <div id="outfits-container" class="space-y-6">
+                  <!-- Outfits will be loaded here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Footer -->
+        <footer
+          class="flex flex-col gap-8 px-5 py-10 text-center bg-secondary-light/50 dark:bg-secondary-dark/50 text-subtle-light dark:text-subtle-dark">
+          <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">About Us</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">FAQ</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Privacy Policy</a>
+          </div>
+          <div class="flex flex-wrap justify-center gap-6">
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">alternate_email</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">photo_camera</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">campaign</span></a>
+          </div>
+          <p class="text-xs">© 2025 StyleRec. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Modal for Comments -->
+    <div id="comments-modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center z-50 p-4">
+      <div class="bg-white dark:bg-secondary-dark rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-xl font-bold">評論與評分</h3>
+          <button id="close-modal" class="p-1 hover:bg-secondary-light dark:hover:bg-secondary-dark rounded-lg">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <div id="comments-content">
+          <!-- Comments will be loaded here -->
+        </div>
+
+        <!-- Add Comment -->
+        <div class="mt-6 border-t border-secondary-light dark:border-secondary-dark pt-6">
+          <h4 class="font-medium mb-4">加入評論</h4>
+          <form id="add-comment-form" class="space-y-4">
+            <input type="hidden" id="comment-outfit-id" />
+
+            <!-- Rating -->
+            <div>
+              <label class="block text-sm font-medium mb-2">評分</label>
+              <div class="star-rating" id="rating-input">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+              </div>
+              <input type="hidden" id="rating-value" value="0" />
+            </div>
+
+            <!-- Comment Text -->
+            <div>
+              <label class="block text-sm font-medium mb-2">評論</label>
+              <textarea id="comment-text" placeholder="分享你的想法..."
+                class="w-full px-4 py-3 border border-secondary-light dark:border-secondary-dark rounded-lg bg-white dark:bg-secondary-dark focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none"
+                rows="3"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+              提交評論
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let selectedTags = [];
+      let currentOutfitId = null;
+      let selectedRating = 0;
+
+      // ===== Tag Selection =====
+      document.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tag = btn.dataset.tag;
+          if (selectedTags.includes(tag)) {
+            selectedTags = selectedTags.filter(t => t !== tag);
+            btn.classList.remove('bg-primary/30', 'text-primary');
+          } else {
+            selectedTags.push(tag);
+            btn.classList.add('bg-primary/30', 'text-primary');
+          }
+          updateSelectedTags();
+        });
+      });
+
+      function updateSelectedTags() {
+        const container = document.getElementById('selected-tags');
+        container.innerHTML = selectedTags.map(tag =>
+          `<span class="px-3 py-1 rounded-full text-sm bg-primary/20 text-primary">${tag}</span>`
+        ).join('');
+        document.getElementById('tags-input').value = selectedTags.join(',');
+      }
+
+      // ===== Image Upload =====
+      const uploadArea = document.getElementById('upload-area');
+      const imageInput = document.getElementById('image-input');
+      const previewImage = document.getElementById('preview-image');
+
+      uploadArea.addEventListener('click', () => imageInput.click());
+
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('bg-primary/10');
+      });
+
+      uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('bg-primary/10');
+      });
+
+      uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('bg-primary/10');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          imageInput.files = files;
+          displayPreview();
+        }
+      });
+
+      imageInput.addEventListener('change', displayPreview);
+
+      function displayPreview() {
+        const file = imageInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            previewImage.src = e.target.result;
+            previewImage.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      // ===== Star Rating =====
+      const stars = document.querySelectorAll('#rating-input .star');
+      const ratingValue = document.getElementById('rating-value');
+
+      stars.forEach(star => {
+        star.addEventListener('click', () => {
+          selectedRating = star.dataset.rating;
+          ratingValue.value = selectedRating;
+          stars.forEach((s, idx) => {
+            if (idx < selectedRating) {
+              s.classList.add('active');
+            } else {
+              s.classList.remove('active');
+            }
+          });
+        });
+
+        star.addEventListener('mouseover', () => {
+          stars.forEach((s, idx) => {
+            if (idx < star.dataset.rating) {
+              s.style.color = '#D8A7B1';
+            } else {
+              s.style.color = '#888888';
+            }
+          });
+        });
+      });
+
+      document.getElementById('rating-input').addEventListener('mouseout', () => {
+        stars.forEach((s, idx) => {
+          if (idx < selectedRating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+
+      // ===== Modal Controls =====
+      const modal = document.getElementById('comments-modal');
+      const closeBtn = document.getElementById('close-modal');
+
+      closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+        }
+      });
+
+      // ===== Upload Form =====
+      document.getElementById('upload-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const file = imageInput.files[0];
+        const description = document.getElementById('description-input').value;
+
+        if (!file || !description) {
+          alert('請上傳照片並填寫描述');
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('description', description);
+        formData.append('tags', selectedTags.join(','));
+
+        try {
+          const res = await fetch('/api/outfits', {
+            method: 'POST',
+            body: formData
+          });
+
+          if (res.ok) {
+            alert('穿搭已上傳！');
+            document.getElementById('upload-form').reset();
+            previewImage.classList.add('hidden');
+            selectedTags = [];
+            document.querySelectorAll('.tag-btn').forEach(btn => {
+              btn.classList.remove('bg-primary/30', 'text-primary');
+            });
+            updateSelectedTags();
+            loadOutfits();
+          } else {
+            alert('上傳失敗');
+          }
+        } catch (err) {
+          alert('錯誤: ' + err.message);
+        }
+      });
+
+      // ===== Load Outfits =====
+      async function loadOutfits() {
+        try {
+          const res = await fetch('/api/outfits');
+          const outfits = await res.json();
+
+          const container = document.getElementById('outfits-container');
+          container.innerHTML = outfits.map(outfit => `
+          <div class="bg-white dark:bg-secondary-dark rounded-lg overflow-hidden shadow-sm border border-secondary-light dark:border-secondary-dark">
+            <!-- Outfit Image -->
+            <img src="${outfit.image_url}" alt="outfit" class="w-full h-64 object-cover" />
+
+            <!-- Outfit Info -->
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h3 class="text-lg font-bold">${outfit.user_name || '匿名用戶'}</h3>
+                  <p class="text-sm text-subtle-light dark:text-subtle-dark">${new Date(outfit.created_at).toLocaleDateString('zh-TW')}</p>
+                </div>
+                <div class="text-right">
+                  <div class="flex items-center gap-1 mb-1">
+                    <span class="material-symbols-outlined text-lg text-primary">star</span>
+                    <span class="font-bold">${outfit.avg_rating ? outfit.avg_rating.toFixed(1) : '0.0'}</span>
+                  </div>
+                  <p class="text-xs text-subtle-light dark:text-subtle-dark">${outfit.comment_count || 0} 評論</p>
+                </div>
+              </div>
+
+              <p class="text-sm mb-4 text-text-light dark:text-text-dark">${outfit.description}</p>
+
+              <!-- Tags -->
+              ${outfit.tags ? `
+                <div class="flex flex-wrap gap-2 mb-4">
+                  ${outfit.tags.split(',').map(tag =>
+            `<span class="px-3 py-1 rounded-full text-xs bg-primary/10 text-primary">${tag}</span>`
+          ).join('')}
+                </div>
+              ` : ''}
+
+              <!-- Actions -->
+              <div class="flex gap-3 pt-4 border-t border-secondary-light dark:border-secondary-dark">
+                <button class="flex-1 flex items-center justify-center gap-2 py-2 hover:bg-secondary-light dark:hover:bg-secondary-dark rounded-lg transition-colors comment-btn" data-outfit-id="${outfit.id}">
+                  <span class="material-symbols-outlined">comment</span>
+                  <span>評論</span>
+                </button>
+                <button class="flex-1 flex items-center justify-center gap-2 py-2 hover:bg-secondary-light dark:hover:bg-secondary-dark rounded-lg transition-colors like-btn" data-outfit-id="${outfit.id}">
+                  <span class="material-symbols-outlined">favorite</span>
+                  <span>${outfit.like_count || 0}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+          // Add event listeners
+          document.querySelectorAll('.comment-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const outfitId = btn.dataset.outfitId;
+              currentOutfitId = outfitId;
+              await loadComments(outfitId);
+              modal.classList.remove('hidden');
+            });
+          });
+
+          document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const outfitId = btn.dataset.outfitId;
+              try {
+                const res = await fetch(`/api/outfits/${outfitId}/like`, { method: 'POST' });
+                if (res.ok) {
+                  loadOutfits();
+                }
+              } catch (err) {
+                console.error('Like failed:', err);
+              }
+            });
+          });
+        } catch (err) {
+          console.error('Error loading outfits:', err);
+        }
+      }
+
+      // ===== Load Comments =====
+      async function loadComments(outfitId) {
+        try {
+          const res = await fetch(`/api/outfits/${outfitId}/comments`);
+          const comments = await res.json();
+
+          const content = document.getElementById('comments-content');
+          content.innerHTML = comments.map(comment => `
+          <div class="mb-4 pb-4 border-b border-secondary-light dark:border-secondary-dark last:border-b-0">
+            <div class="flex items-start justify-between mb-2">
+              <div>
+                <p class="font-medium">${comment.user_name || '匿名用戶'}</p>
+                <p class="text-xs text-subtle-light dark:text-subtle-dark">${new Date(comment.created_at).toLocaleDateString('zh-TW')}</p>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-lg text-primary">star</span>
+                <span class="font-bold">${comment.rating}</span>
+              </div>
+            </div>
+            <p class="text-sm text-text-light dark:text-text-dark">${comment.comment_text}</p>
+          </div>
+        `).join('');
+
+          document.getElementById('comment-outfit-id').value = outfitId;
+          selectedRating = 0;
+          document.getElementById('rating-value').value = 0;
+          document.getElementById('comment-text').value = '';
+          stars.forEach(s => s.classList.remove('active'));
+        } catch (err) {
+          console.error('Error loading comments:', err);
+        }
+      }
+
+      // ===== Add Comment =====
+      document.getElementById('add-comment-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const outfitId = document.getElementById('comment-outfit-id').value;
+        const rating = document.getElementById('rating-value').value;
+        const text = document.getElementById('comment-text').value;
+
+        if (!rating || !text) {
+          alert('請填寫評分和評論');
+          return;
+        }
+
+        try {
+          const res = await fetch(`/api/outfits/${outfitId}/comments`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              rating: parseInt(rating),
+              comment_text: text
+            })
+          });
+
+          if (res.ok) {
+            alert('評論已提交！');
+            await loadComments(outfitId);
+            document.getElementById('add-comment-form').reset();
+            loadOutfits();
+          } else {
+            alert('提交失敗');
+          }
+        } catch (err) {
+          alert('錯誤: ' + err.message);
+        }
+      });
+
+      // ===== Initial Load =====
+      loadOutfits();
+    </script>
+</body>
+
+</html>

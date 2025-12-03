@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>StyleRec - Your Personal Stylist</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="ImgCarousel.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="HomeCSS.css" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#D8A7B1",
+            "background-light": "#F9F9F9",
+            "background-dark": "#1f1f1f",
+            "text-light": "#333333",
+            "text-dark": "#EAEAEA",
+            "secondary-light": "#EAE7DC",
+            "secondary-dark": "#303030",
+            "subtle-light": "#888888",
+            "subtle-dark": "#AAAAAA",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+  <section id="hero-1946">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-secondary-light dark:border-secondary-dark px-6 md:px-10 lg:px-20 py-4">
+          <div class="flex items-center gap-4">
+            <div class="size-6 text-primary">
+              <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2zm-4-4h4v2H6v-2z">
+                </path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">StyleRec</h2>
+          </div>
+          <div class="hidden md:flex items-center gap-9">
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png0.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="home.html">首頁</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png1.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="wardrobe.html">我的衣櫃</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png2.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="recommendation.html">穿搭推薦</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png3.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="share.html">分享 &amp; 互動</a>
+            </li>
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+              <span class="material-symbols-outlined text-xl">person</span>
+            </button>
+            <button class="md:hidden flex items-center justify-center h-10 w-10">
+              <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+          </div>
+        </header>
+        <main class="flex-1">
+          <div class="relative w-full overflow-hidden">
+            <div class="flex transition-transform duration-700 ease-in-out">
+              <div class="min-w-full relative">
+                <a class="block" href="#">
+                  <img class="w-full h-[60vh] md:h-[80vh] object-cover"
+                    data-alt="A beautifully organized, aspirational walk-in closet"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFse6ZO4JpJlsJpEWnZgeIPGzX8WXgJFRPRsdgZfVcmG1mMesScEBGaCU6OETkVTHgVAF3r3fCzBl5CJU11eh6ZFhPNPLuyxPGIDPNCc1BhYhl8EW2lVnN5-8jGkq3FK3-cMU2jfqt5UxAPNL74W-GbGGuIhBWxxzgWvyQotCKHwRF10ygSb2qVMnEsxNGdSNVp6SHd5R1XAAjx0PXnCpPw7hnbx6bE1cWWBrm8el-duSranw0fvD1purx0Ha4A92LaU_GB4Hwpgs" />
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-center">
+                    <div class="text-white p-4">
+                      <h1 class="text-3xl md:text-5xl font-bold mb-2">數位化衣櫃</h1>
+                      <p class="text-base md:text-lg">輕鬆管理你的衣物，探索新的穿衣風格</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="min-w-full relative hidden">
+                <a class="block" href="#">
+                  <img class="w-full h-[60vh] md:h-[80vh] object-cover"
+                    data-alt="A stylishly dressed individual looking confidently at their phone"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNExtwL_CtZot3cYHNVq76-66Vge-OSQoBSDgNKW1t0TXx4FtpB-QUotV8u--0J8BefKooTX_I_CeL5SE7ekFlH9r3Fqia14yv_49fZhnUNurXytZqBtW7jvWdKdkWBphpunxkvakPl0kMr9ieJdOteM0uEw0V_735-0RTLLr7JxjV4AFu5hRS_F0nBIP6_X-Da6Y8hOQLfSojwiNjiptlCDx2wWIu-i19QUoReDipklK_YKjiR4xDoM61TGQBrOHHWVC0Fw3_FUw" />
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-center">
+                    <div class="text-white p-4">
+                      <h1 class="text-3xl md:text-5xl font-bold mb-2">即時推薦個人化風格</h1>
+                      <p class="text-base md:text-lg">量身打造你的每日穿搭</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="min-w-full relative hidden">
+                <a class="block" href="#">
+                  <img class="w-full h-[60vh] md:h-[80vh] object-cover"
+                    data-alt="A dynamic collage of diverse user-submitted outfits"
+                    src="https://i0.wp.com/picjumbo.com/wp-content/uploads/young-woman-taking-a-video-of-the-golden-gate-bridge.jpg?w=2210&quality=70" />
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-center">
+                    <div class="text-white p-4">
+                      <h1 class="text-3xl md:text-5xl font-bold mb-2">穿搭分享平台</h1>
+                      <p class="text-base md:text-lg">分享你的穿搭，從別人身上取得靈感</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-2">
+              <button class="w-3 h-3 rounded-full bg-white opacity-100"></button>
+              <button class="w-3 h-3 rounded-full bg-white opacity-50"></button>
+              <button class="w-3 h-3 rounded-full bg-white opacity-50"></button>
+            </div>
+          </div>
+        </main>
+        <footer
+          class="flex flex-col gap-8 px-5 py-10 text-center bg-secondary-light/50 dark:bg-secondary-dark/50 text-subtle-light dark:text-subtle-dark">
+          <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">About Us</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">FAQ</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Privacy Policy</a>
+          </div>
+          <div class="flex flex-wrap justify-center gap-6">
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">alternate_email</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">photo_camera</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">campaign</span></a>
+          </div>
+          <p class="text-xs">© 2025 StyleRec. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+    <div class="dialog-container">
+      <button id="toggleBtn">
+        <span class="material-symbols-outlined">psychology</span>
+      </button>
+      <div id="dialog">
+        <div class="dialog-header">
+          <h3>AI 穿搭顧問</h3>
+          <button id="closeBtn" class="close-btn">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <iframe src="127.0.0.1:8000" width="100%" height="75%" style="border: none;">
+        </iframe>
+      </div>
+    </div>
+    <script src="Chat.js"></script>
+</body>
+
+</html>

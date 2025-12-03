@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>StyleRec - 穿搭推薦</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="ImgCarousel.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="HomeCSS.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#D8A7B1",
+            "background-light": "#F9F9F9",
+            "background-dark": "#1f1f1f",
+            "text-light": "#333333",
+            "text-dark": "#EAEAEA",
+            "secondary-light": "#EAE7DC",
+            "secondary-dark": "#303030",
+            "subtle-light": "#888888",
+            "subtle-dark": "#AAAAAA",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+  <section id="hero-1946">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- Header-->
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-secondary-light dark:border-secondary-dark px-6 md:px-10 lg:px-20 py-4">
+          <div class="flex items-center gap-4">
+            <div class="size-6 text-primary">
+              <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2zm-4-4h4v2H6v-2z">
+                </path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">StyleRec</h2>
+          </div>
+          <div class="hidden md:flex items-center gap-9">
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png0.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="home.html">首頁</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png1.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="wardrobe.html">我的衣櫃</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png2.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="recommendation.html">穿搭推薦</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png3.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="share.html">分享 &amp; 互動</a>
+            </li>
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+              <span class="material-symbols-outlined text-xl">person</span>
+            </button>
+            <button class="md:hidden flex items-center justify-center h-10 w-10">
+              <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+          </div>
+        </header>
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+          <!-- Chat Container -->
+          <div id="chat-container"
+            class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-4 bg-background-light dark:bg-background-dark">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-lg">smart_toy</span>
+              </div>
+              <div class="max-w-md lg:max-w-2xl">
+                <div
+                  class="bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark rounded-lg p-4 shadow-sm">
+                  <p class="text-sm leading-relaxed">哈囉，我是你的穿搭助理！請告訴我今天的場合，例如：「今天要去約會」、「今天下雨要穿什麼」。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Area -->
+          <div
+            class="border-t border-secondary-light dark:border-secondary-dark bg-background-light dark:bg-background-dark p-6 md:p-8">
+            <div class="max-w-4xl mx-auto flex gap-3">
+              <select id="model-select"
+                class="px-4 py-3 border border-secondary-light dark:border-secondary-dark rounded-lg bg-white dark:bg-secondary-dark text-text-light dark:text-text-dark focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm font-medium">
+                <option value="auto">自動切換</option>
+                <option value="gemini">Gemini</option>
+                <option value="groq">Groq</option>
+                <option value="deepseek">DeepSeek</option>
+              </select>
+              <input id="user-input" type="text" placeholder="輸入你的問題..."
+                class="flex-1 px-4 py-3 border border-secondary-light dark:border-secondary-dark rounded-lg bg-white dark:bg-secondary-dark text-text-light dark:text-text-dark placeholder:text-subtle-light dark:placeholder:text-subtle-dark focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm" />
+              <button id="send-btn"
+                class="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-colors flex items-center gap-2 whitespace-nowrap">
+                <span class="material-symbols-outlined text-lg">send</span>
+                <span class="hidden sm:inline">發送</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer
+          class="flex flex-col gap-8 px-5 py-10 text-center bg-secondary-light/50 dark:bg-secondary-dark/50 text-subtle-light dark:text-subtle-dark">
+          <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">About Us</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">FAQ</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Privacy Policy</a>
+          </div>
+          <div class="flex flex-wrap justify-center gap-6">
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">alternate_email</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">photo_camera</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">campaign</span></a>
+          </div>
+          <p class="text-xs">© 2025 StyleRec. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      const chatContainer = document.getElementById("chat-container");
+      const userInput = document.getElementById("user-input");
+      const sendBtn = document.getElementById("send-btn");
+      const modelSelect = document.getElementById("model-select");
+
+      // 生成或讀取 session ID（維持對話記憶）
+      let sessionId = localStorage.getItem("outfit_ai_session");
+      if (!sessionId) {
+        sessionId = "user-" + Date.now() + "-" + Math.random().toString(36).substring(2, 9);
+        localStorage.setItem("outfit_ai_session", sessionId);
+      }
+
+      // 新增聊天氣泡
+      function appendMessage(sender, text) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("flex", "gap-4", "animate-fadeIn");
+
+        if (sender === "user") {
+          messageDiv.classList.add("justify-end");
+          const msg = document.createElement("div");
+          msg.classList.add("max-w-md", "lg:max-w-2xl");
+          const bubble = document.createElement("div");
+          bubble.classList.add("bg-primary", "text-white", "rounded-lg", "p-4", "shadow-sm");
+          const formattedText = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\n/g, '<br>');
+          bubble.innerHTML = `<p class="text-sm leading-relaxed">${formattedText}</p>`;
+          msg.appendChild(bubble);
+          messageDiv.appendChild(msg);
+        } else {
+          messageDiv.classList.add("justify-start");
+          const icon = document.createElement("div");
+          icon.classList.add("flex-shrink-0", "w-8", "h-8", "rounded-full", "bg-primary/20", "flex", "items-center", "justify-center");
+          icon.innerHTML = '<span class="material-symbols-outlined text-primary text-lg">smart_toy</span>';
+          messageDiv.appendChild(icon);
+
+          const msg = document.createElement("div");
+          msg.classList.add("max-w-md", "lg:max-w-2xl");
+          const bubble = document.createElement("div");
+          bubble.classList.add("bg-secondary-light", "dark:bg-secondary-dark", "text-text-light", "dark:text-text-dark", "rounded-lg", "p-4", "shadow-sm");
+          const formattedText = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\n/g, '<br>');
+          bubble.innerHTML = `<p class="text-sm leading-relaxed">${formattedText}</p>`;
+          msg.appendChild(bubble);
+          messageDiv.appendChild(msg);
+        }
+
+        chatContainer.appendChild(messageDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      // 發送訊息
+      async function sendMessage() {
+        const text = userInput.value.trim();
+        const selectedModel = modelSelect.value;
+        if (!text) return;
+
+        appendMessage("user", text);
+        userInput.value = "";
+
+        appendMessage("ai", "正在思考中...");
+
+        try {
+          const res = await fetch("/recommend", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: text,
+              session_id: sessionId,
+              model: selectedModel
+            })
+          });
+          const data = await res.json();
+
+          // 清除「正在思考中...」
+          chatContainer.lastChild.remove();
+
+          if (data.response) {
+            appendMessage("ai", data.response);
+          } else if (data.error) {
+            appendMessage("ai", "⚠️ 錯誤：" + data.error);
+          } else {
+            appendMessage("ai", "（未收到 AI 回覆，請稍後再試）");
+          }
+        } catch (err) {
+          chatContainer.lastChild.remove();
+          appendMessage("ai", "🚨 錯誤：" + err.message);
+        }
+      }
+
+      // 清除對話記憶（可選功能）
+      async function clearMemory() {
+        try {
+          await fetch("/clear_session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ session_id: sessionId })
+          });
+          appendMessage("ai", "✅ 對話記憶已清除");
+        } catch (err) {
+          appendMessage("ai", "❌ 清除失敗：" + err.message);
+        }
+      }
+
+      sendBtn.addEventListener("click", sendMessage);
+      userInput.addEventListener("keypress", e => {
+        if (e.key === "Enter") sendMessage();
+      });
+    </script>
+
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(5px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease-in;
+      }
+    </style>
+</body>
+
+</html>

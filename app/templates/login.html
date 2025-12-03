@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>StyleRec - 登入/註冊</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#D8A7B1",
+                        "background-light": "#F9F9F9",
+                        "background-dark": "#1f1f1f",
+                        "text-light": "#333333",
+                        "text-dark": "#EAEAEA",
+                        "secondary-light": "#EAE7DC",
+                        "secondary-dark": "#303030",
+                        "subtle-light": "#888888",
+                        "subtle-dark": "#AAAAAA",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Header -->
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-secondary-light dark:border-secondary-dark px-6 md:px-10 lg:px-20 py-4">
+                <div class="flex items-center gap-4">
+                    <div class="size-6 text-primary">
+                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2zm-4-4h4v2H6v-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold tracking-tight">StyleRec</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="home.html"
+                        class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+                        <span class="material-symbols-outlined text-xl">home</span>
+                    </a>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <div class="flex flex-1 justify-center">
+                <div class="layout-content-container flex flex-col w-full flex-1">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-80px)]">
+                        <div class="relative hidden lg:flex flex-col gap-6 p-10 bg-center bg-no-repeat bg-cover"
+                            data-alt="A stylish person wearing a modern outfit, representing the brand's aesthetic."
+                            style='background-image: url("https://media.istockphoto.com/id/1390481905/zh/%E7%85%A7%E7%89%87/multi-factor-authentication-user-login-cybersecurity-privacy-protect-data-internet-network.jpg?s=612x612&w=0&k=20&c=BXpfm4asjyiB7luhLy81acyJLXP9xzNw4OPViagLY6o=");'>
+                            <div class="absolute inset-0 bg-black/40"></div>
+                            <div class="relative z-10 flex flex-col justify-between h-full text-white">
+                                <div class="absolute bottom-1/4 right-7">
+                                    <div class="flex flex-col gap-2 text-right max-w-md">
+                                        <h2 class="text-5xl font-black leading-tight tracking-[-0.02em]">加入我們</h2>
+                                        <p class="text-lg font-normal leading-normal text-white/80">開啟你的時尚之旅</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
+                            <div class="w-full max-w-md space-y-8">
+                                <div class="text-center">
+                                    <h2 class="text-3xl font-bold text-text-light dark:text-text-dark">歡迎!</h2>
+                                    <p class="mt-2 text-sm text-subtle-light dark:text-subtle-dark">登入以繼續探索您的風格</p>
+                                </div>
+                                <div class="pb-3">
+                                    <div class="flex border-b border-secondary-light dark:border-secondary-dark gap-8">
+                                        <a id="login-tab"
+                                            class="flex flex-col items-center justify-center border-b-[3px] border-b-primary pb-[13px] pt-4 w-1/2 cursor-pointer">
+                                            <p class="text-primary text-sm font-bold leading-normal tracking-[0.015em]">
+                                                登入</p>
+                                        </a>
+                                        <a id="register-tab"
+                                            class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-subtle-light dark:text-subtle-dark pb-[13px] pt-4 w-1/2 cursor-pointer hover:text-primary transition-colors">
+                                            <p class="text-sm font-bold leading-normal tracking-[0.015em]">註冊</p>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Login Form -->
+                                <form id="login-form" action="/login" class="space-y-6" method="POST">
+                                    <div class="space-y-4">
+                                        <label class="flex flex-col min-w-40 flex-1">
+                                            <p
+                                                class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                                電子郵件地址</p>
+                                            <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                                <div
+                                                    class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">mail</span>
+                                                </div>
+                                                <input
+                                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
+                                                    placeholder="請輸入您的電子郵件" required="" type="email" />
+                                                <div
+                                                    class="flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0">
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="flex flex-col min-w-40 flex-1">
+                                            <p
+                                                class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                                密碼</p>
+                                            <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                                <div
+                                                    class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">lock</span>
+                                                </div>
+                                                <input
+                                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
+                                                    placeholder="請輸入您的密碼" required="" type="password" id="password" />
+                                                <div class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer"
+                                                    onclick="togglePasswordVisibility('password')">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">visibility</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                        </div>
+                                        <div class="text-sm">
+                                            <a id="forgot-password-link"
+                                                class="font-medium text-primary hover:text-primary/80 cursor-pointer">忘記密碼？</a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
+                                            type="submit">
+                                            <span class="truncate">登入</span>
+                                        </button>
+                                    </div>
+                                    <div class="relative flex py-3 items-center">
+                                        <div class="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
+                                        <span
+                                            class="flex-shrink mx-4 text-sm text-gray-400 dark:text-gray-500">或透過其他方式登入</span>
+                                        <div class="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
+                                    </div>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <a class="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 dark:border-[#3c4053] bg-white dark:bg-[#1c1e26] h-14 px-5 text-gray-800 dark:text-white text-base font-medium leading-normal hover:bg-gray-50 dark:hover:bg-white/5"
+                                            href="/login/google">
+                                            <svg class="h-6 w-6" viewBox="0 0 260 260"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+                                                    fill="#4285F4" />
+                                                <path
+                                                    d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+                                                    fill="#34A853" />
+                                                <path
+                                                    d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"
+                                                    fill="#FBBC05" />
+                                                <path
+                                                    d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+                                                    fill="#EB4335" />
+                                            </svg>
+                                            <span>Google 登入</span>
+                                        </a>
+                                        <a class="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 dark:border-[#3c4053] bg-white dark:bg-[#1c1e26] h-14 px-5 text-gray-800 dark:text-white text-base font-medium leading-normal hover:bg-gray-50 dark:hover:bg-white/5"
+                                            href="/login/facebook">
+                                            <svg class="h-6 w-6" fill="#1877F2" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.35C0 23.407.593 24 1.325 24H12.82v-9.29H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z">
+                                                </path>
+                                            </svg>
+                                            <span>Facebook 登入</span>
+                                        </a>
+                                    </div>
+                                </form>
+
+                                <!-- Register Form -->
+                                <form id="register-form" action="/register" class="space-y-6 hidden" method="POST">
+                                    <div class="space-y-4">
+                                        <label class="flex flex-col min-w-40 flex-1">
+                                            <p
+                                                class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                                電子郵件地址</p>
+                                            <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                                <div
+                                                    class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">mail</span>
+                                                </div>
+                                                <input
+                                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
+                                                    placeholder="請輸入您的電子郵件" required="" type="email" name="email" />
+                                                <div
+                                                    class="flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0">
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="flex flex-col min-w-40 flex-1">
+                                            <p
+                                                class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                                密碼</p>
+                                            <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                                <div
+                                                    class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">lock</span>
+                                                </div>
+                                                <input
+                                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
+                                                    placeholder="請輸入您的密碼" required="" type="password"
+                                                    id="register-password" />
+                                                <div class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer"
+                                                    onclick="togglePasswordVisibility('register-password')">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">visibility</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="flex flex-col min-w-40 flex-1">
+                                            <p
+                                                class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                                確認密碼</p>
+                                            <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                                <div
+                                                    class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">lock</span>
+                                                </div>
+                                                <input
+                                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
+                                                    placeholder="請再次輸入您的密碼" required="" type="password"
+                                                    id="confirm-password" />
+                                                <div class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer"
+                                                    onclick="togglePasswordVisibility('confirm-password')">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">visibility</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
+                                            type="submit">
+                                            <span class="truncate">註冊</span>
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <!-- Password Recovery Form -->
+                                <form id="recovery-form" action="/recover" class="space-y-6 hidden" method="POST">
+                                    <div class="space-y-4">
+                                        <label class="flex flex-col min-w-40 flex-1">
+                                            <p
+                                                class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
+                                                電子郵件地址</p>
+                                            <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                                <div
+                                                    class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                                    <span class="material-symbols-outlined"
+                                                        style="font-size: 20px;">mail</span>
+                                                </div>
+                                                <input
+                                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
+                                                    placeholder="請輸入您的電子郵件" required="" type="email" name="email" />
+                                                <div
+                                                    class="flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0">
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
+                                            type="submit">
+                                            <span class="truncate">重設密碼</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer
+                class="flex flex-col gap-8 px-5 py-10 text-center bg-secondary-light/50 dark:bg-secondary-dark/50 text-subtle-light dark:text-subtle-dark">
+                <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">About Us</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">FAQ</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a class="hover:text-primary transition-colors" href="#"><span
+                            class="material-symbols-outlined">alternate_email</span></a>
+                    <a class="hover:text-primary transition-colors" href="#"><span
+                            class="material-symbols-outlined">photo_camera</span></a>
+                    <a class="hover:text-primary transition-colors" href="#"><span
+                            class="material-symbols-outlined">campaign</span></a>
+                </div>
+                <p class="text-xs">© 2025 StyleRec. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+
+        // Tab switching
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const recoveryForm = document.getElementById('recovery-form');
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
+
+        loginTab.addEventListener('click', () => {
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+            recoveryForm.classList.add('hidden');
+            loginTab.classList.add('border-b-primary', 'text-primary');
+            loginTab.classList.remove('text-subtle-light', 'dark:text-subtle-dark');
+            registerTab.classList.remove('border-b-primary', 'text-primary');
+            registerTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
+        });
+
+        registerTab.addEventListener('click', () => {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            recoveryForm.classList.add('hidden');
+            registerTab.classList.add('border-b-primary', 'text-primary');
+            registerTab.classList.remove('text-subtle-light', 'dark:text-subtle-dark');
+            loginTab.classList.remove('border-b-primary', 'text-primary');
+            loginTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
+        });
+
+        forgotPasswordLink.addEventListener('click', () => {
+            loginForm.classList.add('hidden');
+            registerForm.classList.add('hidden');
+            recoveryForm.classList.remove('hidden');
+            loginTab.classList.remove('border-b-primary', 'text-primary');
+            loginTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
+            registerTab.classList.remove('border-b-primary', 'text-primary');
+            registerTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
+        });
+    </script>
+</body>
+
+</html>

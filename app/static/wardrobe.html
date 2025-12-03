@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-TW">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>StyleRec - 穿搭推薦</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="ImgCarousel.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="HomeCSS.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#D8A7B1",
+            "background-light": "#F9F9F9",
+            "background-dark": "#1f1f1f",
+            "text-light": "#333333",
+            "text-dark": "#EAEAEA",
+            "secondary-light": "#EAE7DC",
+            "secondary-dark": "#303030",
+            "subtle-light": "#888888",
+            "subtle-dark": "#AAAAAA",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+  <section id="hero-1946">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- Header-->
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-secondary-light dark:border-secondary-dark px-6 md:px-10 lg:px-20 py-4">
+          <div class="flex items-center gap-4">
+            <div class="size-6 text-primary">
+              <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9h4v2h-4v-2zm0 4h4v2h-4v-2zm-4-4h4v2H6v-2z">
+                </path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">StyleRec</h2>
+          </div>
+          <div class="hidden md:flex items-center gap-9">
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png0.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="home.html">首頁</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png1.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="wardrobe.html">我的衣櫃</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png2.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="recommendation.html">穿搭推薦</a>
+            </li>
+            <br>
+            <li class="cs-item">
+              <picture class="cs-icon-picture">
+                <img class="cs-icon" src="pic/png3.png" decoding="async" alt="icon" width="40" height="40"
+                  aria-hidden="true">
+              </picture>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="share.html">分享 &amp; 互動</a>
+            </li>
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+              <span class="material-symbols-outlined text-xl">person</span>
+            </button>
+            <button class="md:hidden flex items-center justify-center h-10 w-10">
+              <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+          </div>
+        </header>
+        <main class="px-6 md:px-10 lg:px-20 py-8">
+          <section class="max-w-4xl mx-auto">
+            <h3 class="text-2xl font-bold mb-4">我的衣櫃 — 上傳衣物</h3>
+
+            <form id="uploadForm" class="flex flex-col gap-4" onsubmit="return false;">
+              <div class="flex flex-wrap gap-3 items-center">
+                <input id="itemName" type="text" placeholder="衣物名稱（選填）"
+                  class="px-3 py-2 border rounded-md w-40 bg-white dark:bg-secondary-dark/80" />
+                <select id="itemCategory" class="px-3 py-2 border rounded-md w-40 bg-white dark:bg-secondary-dark/80">
+                  <option value="top">上衣</option>
+                  <option value="bottom">下身</option>
+                  <option value="shoes">鞋子</option>
+                </select>
+                <input id="itemImage" type="file" accept="image/*" multiple
+                  class="px-3 py-2 border rounded-md bg-white dark:bg-secondary-dark/80" />
+                <button id="addBtn" type="button"
+                  class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">上傳</button>
+              </div>
+            </form>
+
+            <div id="gallery" class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+          </section>
+
+          <script>
+              (function () {
+                const storageKey = 'wardrobeItems_v1';
+                let items = [];
+
+                const el = {
+                  name: document.getElementById('itemName'),
+                  category: document.getElementById('itemCategory'),
+                  image: document.getElementById('itemImage'),
+                  addBtn: document.getElementById('addBtn'),
+                  gallery: document.getElementById('gallery')
+                };
+
+                function loadItems() {
+                  try {
+                    const raw = localStorage.getItem(storageKey);
+                    items = raw ? JSON.parse(raw) : [];
+                  } catch (e) { items = []; }
+                }
+
+                function saveItems() {
+                  localStorage.setItem(storageKey, JSON.stringify(items));
+                }
+
+                function render() {
+                  el.gallery.innerHTML = '';
+                  if (!items.length) {
+                    el.gallery.innerHTML = '<p class="text-sm text-subtle-light dark:text-subtle-dark">目前沒有衣物，請使用上方表單上傳圖片。</p>';
+                    return;
+                  }
+                  items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white dark:bg-secondary-dark/80 rounded-md p-2 shadow-sm flex flex-col items-center text-center';
+                    const img = document.createElement('img');
+                    img.src = item.dataUrl;
+                    img.alt = item.name || item.filename || '衣物圖片';
+                    img.className = 'w-full h-36 object-cover rounded-md mb-2';
+                    const title = document.createElement('div');
+                    title.className = 'text-sm font-medium';
+                    title.textContent = item.name || item.filename;
+                    const meta = document.createElement('div');
+                    meta.className = 'text-xs text-subtle-light dark:text-subtle-dark';
+                    meta.textContent = item.category || '';
+                    card.appendChild(img);
+                    card.appendChild(title);
+                    card.appendChild(meta);
+                    el.gallery.appendChild(card);
+                  });
+                }
+
+                function handleFiles(files) {
+                  const fileList = Array.from(files);
+                  if (!fileList.length) return;
+
+                  let remaining = fileList.length;
+                  fileList.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                      const dataUrl = e.target.result;
+                      const entry = {
+                        id: Date.now() + Math.random(),
+                        filename: file.name,
+                        name: el.name.value.trim() || file.name,
+                        category: el.category.value,
+                        dataUrl
+                      };
+                      items.unshift(entry);
+                      remaining -= 1;
+                      if (remaining === 0) {
+                        saveItems();
+                        render();
+                        // reset file input and name
+                        el.image.value = '';
+                        el.name.value = '';
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                  });
+                }
+
+                el.addBtn.addEventListener('click', () => {
+                  const files = el.image.files;
+                  if (!files.length) {
+                    alert('請選擇至少一張圖片來上傳。');
+                    return;
+                  }
+                  handleFiles(files);
+                });
+
+                // init
+                loadItems();
+                render();
+              })();
+          </script>
+        </main>
+        <footer
+          class="flex flex-col gap-8 px-5 py-10 text-center bg-secondary-light/50 dark:bg-secondary-dark/50 text-subtle-light dark:text-subtle-dark">
+          <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">About Us</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Contact</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">FAQ</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Privacy Policy</a>
+          </div>
+          <div class="flex flex-wrap justify-center gap-6">
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">alternate_email</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">photo_camera</span></a>
+            <a class="hover:text-primary transition-colors" href="#"><span
+                class="material-symbols-outlined">campaign</span></a>
+          </div>
+          <p class="text-xs">© 2025 StyleRec. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+    <div class="dialog-container">
+      <button id="toggleBtn">展開對話框</button>
+      <div id="dialog">
+        <iframe src="https://your-ai-chat-page.com?theme=dark&user=guest" width="400" height="600"
+          style="border: none; border-radius: 12px;">
+        </iframe>
+      </div>
+    </div>
+    <script src="page1js2.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log
+package-lock.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docs & misc
+*.md
+docs/
+openspec/
+misc/
+.azure/
+
+# Database dumps & backups
+*.sql
+init/archived/
+app/static/old_html_backup/
+
+# Large datasets (if not needed in container)
+dataset/*.csv
+other_projects/
+
+# Docker
+docker-compose*.yml
+Dockerfile*
+.dockerignore
