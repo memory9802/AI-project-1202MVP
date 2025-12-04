@@ -1,3 +1,4 @@
+﻿
 <!DOCTYPE html>
 <html class="light" lang="zh-TW">
 
@@ -59,7 +60,7 @@
                     <h2 class="text-xl font-bold tracking-tight">StyleRec</h2>
                 </div>
                 <div class="flex items-center gap-4">
-                    <a href="home.html"
+                    <a href="{{ url_for('home.index') }}"
                         class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
                         <span class="material-symbols-outlined text-xl">home</span>
                     </a>
@@ -77,8 +78,8 @@
                             <div class="relative z-10 flex flex-col justify-between h-full text-white">
                                 <div class="absolute bottom-1/4 right-7">
                                     <div class="flex flex-col gap-2 text-right max-w-md">
-                                        <h2 class="text-5xl font-black leading-tight tracking-[-0.02em]">加入我們</h2>
-                                        <p class="text-lg font-normal leading-normal text-white/80">開啟你的時尚之旅</p>
+                                        <h2 class="text-5xl font-black leading-tight tracking-[-0.02em]">登入 / 註冊</h2>
+                                        <p class="text-lg font-normal leading-normal text-white/80">進入帳號以管理個人化推薦</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,30 +88,50 @@
                             class="flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
                             <div class="w-full max-w-md space-y-8">
                                 <div class="text-center">
-                                    <h2 class="text-3xl font-bold text-text-light dark:text-text-dark">歡迎!</h2>
-                                    <p class="mt-2 text-sm text-subtle-light dark:text-subtle-dark">登入以繼續探索您的風格</p>
+                                    <h2 id="auth-title" class="text-3xl font-bold text-text-light dark:text-text-dark">歡迎回來！</h2>
+                                    <p id="auth-subtitle" class="mt-2 text-sm text-subtle-light dark:text-subtle-dark">登入以繼續探索您的穿搭靈感</p>
                                 </div>
-                                <div class="pb-3">
+                                <div id="auth-message"
+                                    class="hidden rounded-lg border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark px-4 py-3 text-sm text-text-light dark:text-text-dark"></div>
+                                <div id="tab-bar" class="pb-3">
                                     <div class="flex border-b border-secondary-light dark:border-secondary-dark gap-8">
                                         <a id="login-tab"
-                                            class="flex flex-col items-center justify-center border-b-[3px] border-b-primary pb-[13px] pt-4 w-1/2 cursor-pointer">
-                                            <p class="text-primary text-sm font-bold leading-normal tracking-[0.015em]">
+                                            class="tab-link flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary pb-[13px] pt-4 w-1/2 cursor-pointer">
+                                            <p class="text-sm font-bold leading-normal tracking-[0.015em]">
                                                 登入</p>
                                         </a>
                                         <a id="register-tab"
-                                            class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-subtle-light dark:text-subtle-dark pb-[13px] pt-4 w-1/2 cursor-pointer hover:text-primary transition-colors">
+                                            class="tab-link flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-subtle-light dark:text-subtle-dark pb-[13px] pt-4 w-1/2 cursor-pointer hover:text-primary transition-colors">
                                             <p class="text-sm font-bold leading-normal tracking-[0.015em]">註冊</p>
                                         </a>
                                     </div>
                                 </div>
 
+                                <div id="logged-in-panel"
+                                    class="hidden rounded-lg border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark p-5 space-y-4 shadow-sm">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm text-subtle-light dark:text-subtle-dark">目前登入帳號</p>
+                                            <p id="logged-in-email"
+                                                class="text-lg font-semibold text-text-light dark:text-text-dark"></p>
+                                        </div>
+                                        <span class="material-symbols-outlined text-primary">check_circle</span>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <button id="logout-button"
+                                            class="flex-1 rounded-lg border border-secondary-light dark:border-secondary-dark px-4 py-3 text-sm font-semibold text-text-light dark:text-text-dark hover:bg-secondary-light/50 dark:hover:bg-secondary-dark/70 transition-colors">登出</button>
+                                        <a href="{{ url_for('home.index') }}"
+                                            class="flex-1 rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-white hover:bg-primary/90 transition-colors">返回首頁</a>
+                                    </div>
+                                </div>
                                 <!-- Login Form -->
-                                <form id="login-form" action="/login" class="space-y-6" method="POST">
+                                <form id="login-form" action="/login" class="space-y-6 min-h-[520px]" method="POST"
+                                    novalidate>
                                     <div class="space-y-4">
                                         <label class="flex flex-col min-w-40 flex-1">
                                             <p
                                                 class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
-                                                電子郵件地址</p>
+                                                電子郵件</p>
                                             <div class="flex w-full flex-1 items-stretch rounded-lg">
                                                 <div
                                                     class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
@@ -119,7 +140,7 @@
                                                 </div>
                                                 <input
                                                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
-                                                    placeholder="請輸入您的電子郵件" required="" type="email" />
+                                                    placeholder="請輸入您的電子郵件" required type="email" name="email" />
                                                 <div
                                                     class="flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0">
                                                 </div>
@@ -137,7 +158,8 @@
                                                 </div>
                                                 <input
                                                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
-                                                    placeholder="請輸入您的密碼" required="" type="password" id="password" />
+                                                    placeholder="請輸入您的密碼" required type="password" id="password"
+                                                    name="password" minlength="6" />
                                                 <div class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer"
                                                     onclick="togglePasswordVisibility('password')">
                                                     <span class="material-symbols-outlined"
@@ -147,8 +169,11 @@
                                         </label>
                                     </div>
                                     <div class="flex items-center justify-between">
-                                        <div class="flex items-center">
-                                        </div>
+                                        <label class="flex items-center gap-2 text-sm text-subtle-light dark:text-subtle-dark">
+                                            <input type="checkbox" class="rounded border-secondary-light dark:border-secondary-dark text-primary focus:ring-primary"
+                                                id="remember-me" />
+                                            <span>保持登入</span>
+                                        </label>
                                         <div class="text-sm">
                                             <a id="forgot-password-link"
                                                 class="font-medium text-primary hover:text-primary/80 cursor-pointer">忘記密碼？</a>
@@ -164,7 +189,7 @@
                                     <div class="relative flex py-3 items-center">
                                         <div class="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
                                         <span
-                                            class="flex-shrink mx-4 text-sm text-gray-400 dark:text-gray-500">或透過其他方式登入</span>
+                                            class="flex-shrink mx-4 text-sm text-gray-400 dark:text-gray-500">或透過下列方式登入</span>
                                         <div class="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
                                     </div>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -201,12 +226,13 @@
                                 </form>
 
                                 <!-- Register Form -->
-                                <form id="register-form" action="/register" class="space-y-6 hidden" method="POST">
+                                <form id="register-form" action="/register" class="space-y-6 hidden min-h-[520px]"
+                                    method="POST" novalidate>
                                     <div class="space-y-4">
                                         <label class="flex flex-col min-w-40 flex-1">
                                             <p
                                                 class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
-                                                電子郵件地址</p>
+                                                電子郵件</p>
                                             <div class="flex w-full flex-1 items-stretch rounded-lg">
                                                 <div
                                                     class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
@@ -215,7 +241,7 @@
                                                 </div>
                                                 <input
                                                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
-                                                    placeholder="請輸入您的電子郵件" required="" type="email" name="email" />
+                                                    placeholder="請輸入您的電子郵件" required type="email" name="email" />
                                                 <div
                                                     class="flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0">
                                                 </div>
@@ -233,8 +259,8 @@
                                                 </div>
                                                 <input
                                                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
-                                                    placeholder="請輸入您的密碼" required="" type="password"
-                                                    id="register-password" />
+                                                    placeholder="請輸入您的密碼（至少 6 碼）" required type="password"
+                                                    id="register-password" name="password" minlength="6" />
                                                 <div class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer"
                                                     onclick="togglePasswordVisibility('register-password')">
                                                     <span class="material-symbols-outlined"
@@ -254,8 +280,8 @@
                                                 </div>
                                                 <input
                                                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
-                                                    placeholder="請再次輸入您的密碼" required="" type="password"
-                                                    id="confirm-password" />
+                                                    placeholder="請再次輸入密碼" required type="password"
+                                                    id="confirm-password" name="confirmPassword" minlength="6" />
                                                 <div class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer"
                                                     onclick="togglePasswordVisibility('confirm-password')">
                                                     <span class="material-symbols-outlined"
@@ -274,12 +300,13 @@
                                 </form>
 
                                 <!-- Password Recovery Form -->
-                                <form id="recovery-form" action="/recover" class="space-y-6 hidden" method="POST">
+                                <form id="recovery-form" action="/recover" class="space-y-6 hidden min-h-[520px]"
+                                    method="POST" novalidate>
                                     <div class="space-y-4">
                                         <label class="flex flex-col min-w-40 flex-1">
                                             <p
                                                 class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">
-                                                電子郵件地址</p>
+                                                電子郵件</p>
                                             <div class="flex w-full flex-1 items-stretch rounded-lg">
                                                 <div
                                                     class="text-subtle-light dark:text-subtle-dark flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pl-[15px] rounded-l-lg border-r-0">
@@ -288,7 +315,7 @@
                                                 </div>
                                                 <input
                                                     class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark focus:border-primary dark:focus:border-primary h-14 placeholder:text-subtle-light dark:placeholder:text-subtle-dark p-[15px] border-l-0 border-r-0 text-base font-normal leading-normal"
-                                                    placeholder="請輸入您的電子郵件" required="" type="email" name="email" />
+                                                    placeholder="輸入用來重設密碼的電子郵件" required type="email" name="email" />
                                                 <div
                                                     class="flex border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0">
                                                 </div>
@@ -299,8 +326,12 @@
                                         <button
                                             class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50"
                                             type="submit">
-                                            <span class="truncate">重設密碼</span>
+                                            <span class="truncate">寄送重設連結</span>
                                         </button>
+                                        <div class="mt-3 text-center">
+                                            <button type="button" id="back-to-login"
+                                                class="text-sm font-medium text-primary hover:text-primary/80">返回登入</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -330,7 +361,6 @@
             </footer>
         </div>
     </div>
-
     <script>
         // Toggle password visibility
         function togglePasswordVisibility(fieldId) {
@@ -338,43 +368,211 @@
             field.type = field.type === 'password' ? 'text' : 'password';
         }
 
-        // Tab switching
+        // Tab and view switching helpers
         const loginTab = document.getElementById('login-tab');
         const registerTab = document.getElementById('register-tab');
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
         const recoveryForm = document.getElementById('recovery-form');
         const forgotPasswordLink = document.getElementById('forgot-password-link');
+        const backToLogin = document.getElementById('back-to-login');
+        const authMessage = document.getElementById('auth-message');
+        const loggedInPanel = document.getElementById('logged-in-panel');
+        const loggedInEmail = document.getElementById('logged-in-email');
+        const logoutButton = document.getElementById('logout-button');
+        const rememberMe = document.getElementById('remember-me');
+        const stateKey = 'styleRecAuthState';
+        const tabBar = document.getElementById('tab-bar');
+        const authTitle = document.getElementById('auth-title');
+        const authSubtitle = document.getElementById('auth-subtitle');
 
-        loginTab.addEventListener('click', () => {
-            loginForm.classList.remove('hidden');
-            registerForm.classList.add('hidden');
-            recoveryForm.classList.add('hidden');
-            loginTab.classList.add('border-b-primary', 'text-primary');
-            loginTab.classList.remove('text-subtle-light', 'dark:text-subtle-dark');
-            registerTab.classList.remove('border-b-primary', 'text-primary');
-            registerTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
+        const copy = {
+            welcome: {
+                title: '歡迎回來！',
+                subtitle: '登入以繼續探索您的穿搭靈感',
+            },
+            recovery: {
+                title: '找回密碼',
+                subtitle: '輸入註冊電子郵件',
+            }
+        };
+
+        const setCopy = (variant) => {
+            const data = copy[variant];
+            if (!data) return;
+            authTitle.textContent = data.title;
+            authSubtitle.textContent = data.subtitle;
+        };
+
+        const setTabState = (active) => {
+            const activeClasses = ['border-b-primary', 'text-primary'];
+            const inactiveClasses = ['border-b-transparent', 'text-subtle-light', 'dark:text-subtle-dark'];
+
+            [loginTab, registerTab].forEach((tab) => {
+                tab.classList.remove(...activeClasses, ...inactiveClasses);
+                tab.classList.add('tab-link');
+            });
+
+            if (active === 'login') {
+                loginTab.classList.add(...activeClasses);
+                registerTab.classList.add(...inactiveClasses);
+            } else if (active === 'register') {
+                registerTab.classList.add(...activeClasses);
+                loginTab.classList.add(...inactiveClasses);
+            } else {
+                loginTab.classList.add(...inactiveClasses);
+                registerTab.classList.add(...inactiveClasses);
+            }
+        };
+
+        const tabs = {
+            showLogin() {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                recoveryForm.classList.add('hidden');
+                loggedInPanel.classList.add('hidden');
+                setTabState('login');
+                setCopy('welcome');
+                tabBar.classList.remove('invisible', 'h-0');
+                hideMessage();
+            },
+            showRegister() {
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                recoveryForm.classList.add('hidden');
+                loggedInPanel.classList.add('hidden');
+                setTabState('register');
+                setCopy('welcome');
+                tabBar.classList.remove('invisible', 'h-0');
+                hideMessage();
+            },
+            showRecovery() {
+                loginForm.classList.add('hidden');
+                registerForm.classList.add('hidden');
+                recoveryForm.classList.remove('hidden');
+                loggedInPanel.classList.add('hidden');
+                setTabState('none');
+                setCopy('recovery');
+                tabBar.classList.add('invisible', 'h-0');
+                hideMessage();
+            },
+            showLoggedIn(email) {
+                loginForm.classList.add('hidden');
+                registerForm.classList.add('hidden');
+                recoveryForm.classList.add('hidden');
+                loggedInPanel.classList.remove('hidden');
+                setTabState('none');
+                setCopy('welcome');
+                loggedInEmail.textContent = email;
+                hideMessage();
+            }
+        };
+
+        const persistState = (email) => {
+            const payload = { email, timestamp: Date.now(), remember: rememberMe.checked };
+            if (payload.remember) {
+                localStorage.setItem(stateKey, JSON.stringify(payload));
+                sessionStorage.removeItem(stateKey);
+            } else {
+                sessionStorage.setItem(stateKey, JSON.stringify(payload));
+                localStorage.removeItem(stateKey);
+            }
+        };
+
+        const readState = () => {
+            const raw = localStorage.getItem(stateKey) || sessionStorage.getItem(stateKey);
+            if (!raw) return null;
+            try {
+                return JSON.parse(raw);
+            } catch {
+                return null;
+            }
+        };
+
+        const clearState = () => {
+            localStorage.removeItem(stateKey);
+            sessionStorage.removeItem(stateKey);
+        };
+
+        const showMessage = (text, type = 'info') => {
+            authMessage.textContent = text;
+            const color = type === 'error' ? 'text-red-600 dark:text-red-400' : 'text-text-light dark:text-text-dark';
+            authMessage.className = `rounded-lg border border-secondary-light dark:border-secondary-dark bg-white dark:bg-secondary-dark px-4 py-3 text-sm ${color}`;
+            authMessage.classList.remove('hidden');
+        };
+
+        const hideMessage = () => {
+            authMessage.classList.add('hidden');
+        };
+
+        loginTab.addEventListener('click', tabs.showLogin);
+        registerTab.addEventListener('click', tabs.showRegister);
+        forgotPasswordLink.addEventListener('click', tabs.showRecovery);
+        backToLogin.addEventListener('click', tabs.showLogin);
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = loginForm.email.value.trim();
+            const password = loginForm.password.value.trim();
+            if (!email || !password) {
+                showMessage('請填寫完整的登入資料。', 'error');
+                return;
+            }
+            if (password.length < 6) {
+                showMessage('密碼至少需要 6 碼。', 'error');
+                return;
+            }
+            persistState(email);
+            showMessage('登入成功，正在導向您的空間。');
+            setTimeout(() => tabs.showLoggedIn(email), 400);
         });
 
-        registerTab.addEventListener('click', () => {
-            loginForm.classList.add('hidden');
-            registerForm.classList.remove('hidden');
-            recoveryForm.classList.add('hidden');
-            registerTab.classList.add('border-b-primary', 'text-primary');
-            registerTab.classList.remove('text-subtle-light', 'dark:text-subtle-dark');
-            loginTab.classList.remove('border-b-primary', 'text-primary');
-            loginTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = registerForm.email.value.trim();
+            const password = registerForm.password.value.trim();
+            const confirmPassword = registerForm.confirmPassword.value.trim();
+            if (!email || !password || !confirmPassword) {
+                showMessage('請完成所有註冊欄位。', 'error');
+                return;
+            }
+            if (password.length < 6) {
+                showMessage('密碼長度需至少 6 碼。', 'error');
+                return;
+            }
+            if (password !== confirmPassword) {
+                showMessage('兩次輸入的密碼不一致。', 'error');
+                return;
+            }
+            persistState(email);
+            showMessage('註冊成功，已自動登入。');
+            setTimeout(() => tabs.showLoggedIn(email), 400);
         });
 
-        forgotPasswordLink.addEventListener('click', () => {
-            loginForm.classList.add('hidden');
-            registerForm.classList.add('hidden');
-            recoveryForm.classList.remove('hidden');
-            loginTab.classList.remove('border-b-primary', 'text-primary');
-            loginTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
-            registerTab.classList.remove('border-b-primary', 'text-primary');
-            registerTab.classList.add('text-subtle-light', 'dark:text-subtle-dark');
+        recoveryForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = recoveryForm.email.value.trim();
+            if (!email) {
+                showMessage('請輸入用來重設的電子郵件。', 'error');
+                return;
+            }
+            showMessage('已寄出重設密碼連結，請檢查您的信箱。');
+            setTimeout(() => tabs.showLogin(), 800);
         });
+
+        logoutButton.addEventListener('click', () => {
+            clearState();
+            showMessage('您已登出，下次登入時可勾選保持登入。');
+            tabs.showLogin();
+        });
+
+        const saved = readState();
+        if (saved?.email) {
+            rememberMe.checked = !!saved.remember;
+            tabs.showLoggedIn(saved.email);
+        } else {
+            tabs.showLogin();
+        }
     </script>
 </body>
 

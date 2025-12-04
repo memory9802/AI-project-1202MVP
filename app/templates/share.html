@@ -74,7 +74,7 @@
                 <img class="cs-icon" src="{{ url_for('static', filename='pic/png0.png') }}" decoding="async" alt="icon" width="40" height="40"
                   aria-hidden="true">
               </picture>
-              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('home') }}">首頁</a>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('home.index') }}">首頁</a>
             </li>
             <br>
             <li class="cs-item">
@@ -82,7 +82,7 @@
                 <img class="cs-icon" src="{{ url_for('static', filename='pic/png1.png') }}" decoding="async" alt="icon" width="40" height="40"
                   aria-hidden="true">
               </picture>
-              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('wardrobe') }}">我的衣櫃</a>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('wardrobe.wardrobe') }}">我的衣櫃</a>
             </li>
             <br>
             <li class="cs-item">
@@ -90,7 +90,7 @@
                 <img class="cs-icon" src="{{ url_for('static', filename='pic/png2.png') }}" decoding="async" alt="icon" width="40" height="40"
                   aria-hidden="true">
               </picture>
-              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('recommendation') }}">穿搭推薦</a>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('recommendation.recommend') }}">穿搭推薦</a>
             </li>
             <br>
             <li class="cs-item">
@@ -98,13 +98,13 @@
                 <img class="cs-icon" src="{{ url_for('static', filename='pic/png3.png') }}" decoding="async" alt="icon" width="40" height="40"
                   aria-hidden="true">
               </picture>
-              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('share') }}">分享 &amp; 互動</a>
+              <a class="text-sm font-medium hover:text-primary transition-colors" href="{{ url_for('share.share') }}">分享 &amp; 互動</a>
             </li>
           </div>
           <div class="flex items-center gap-4">
             <button
               class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-secondary-light dark:bg-secondary-dark hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
-              href="{{ url_for('login') }}">
+              ><a href="{{ url_for('login.login') }}">
               <span class="material-symbols-outlined text-xl">person</span>
             </button>
             <button class="md:hidden flex items-center justify-center h-10 w-10">

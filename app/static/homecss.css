@@ -52,9 +52,8 @@ body {
   background: white;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  width: 35vw;   /* 調整寬度 */
-  height: calc(100vh - var(--header-height) - 65px); /* 高度動態計算 */
-  max-height: calc(100vh - var(--header-height) - 65px);
+  width: 50vw;   /* 調整寬度 */
+  height: 60vh;
   margin-bottom: 16px;
   opacity: 0;
   transform: translateY(20px) scale(0.95);
